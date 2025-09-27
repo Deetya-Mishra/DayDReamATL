@@ -6,9 +6,9 @@
 define U = Character("Agent 874")
 define c = Character("Computer", color="#bc13fe")
 define f = Character("Field Coordinator")
-define g = character("Lilith")
-define m = character("Levi")
-define t2 = charcter("Agent 986")
+define g = Character("Lilith")
+define m = Character("Levi")
+define t2 = Character("Agent 986")
 define t1 = Character("Agent 675")
 
 
@@ -70,13 +70,15 @@ label briefingf:
     f "These are the two AI assistants. They’ll be your mission assistant. You can activate them by saying, ‘Hey Lilith or Levi,’ into your watch. They’ll provide intel, navigation, and emergency support."
     f "Now you may be wondering what the difference between the two is. Lilith is a cloaking machine that can create disguises and turn you invisible for a short period of time however it will impact your mental health and mess with your self identity."
     f " Levi can help you phase through walls and teleportation. However, each time you use it, it will leave a scar on your body. The farther you teleport or the thicker the wall you phase through will determine your injury. Sacrifices must be made for this mission so choose wisely."
-    f"Now agents, please note that sacrifices must be made for this mission so choose wisely. A prompt will show up on your watch for you to choose your assistant."
+    f "Now agents, please note that sacrifices must be made for this mission so choose wisely. A prompt will show up on your watch for you to choose your assistant."
     menu:
         f "Now you shall choose your auxillary"
-        "Lilith": jump Lilith
-        "Levi": jump Levi
+        "Lilith": 
+            jump lilith
+        "Levi": 
+            jump levi
 
-Label Lilith:
+label lilith:
 
 
     # These display lines of dialogue.
@@ -123,11 +125,11 @@ Label Lilith:
     t1 "Chuckles awkwardly and rubs the back of their head."
 
 
-Label Levi:
+label levi:
 
 
     # These display lines of dialogue.
-     g "I’m Levi. I can help you phase through walls and teleportation. However, each time you use my powers, it will leave a scar on your body. The farther you teleport or the thicker the wall you phase through will determine your injury."
+    g "I’m Levi. I can help you phase through walls and teleportation. However, each time you use my powers, it will leave a scar on your body. The farther you teleport or the thicker the wall you phase through will determine your injury."
     f "You’ve all been handpicked for this assignment. Meaning you are here because you’re capable."
     "They swipe the hologram again. The screen shifts to an image: a luxury tower glowing gold against the city night. The words “Project Starlight” hover above it in crimson font."
     f "Mission #436: Project Starlight. As some of you know, Alexander Lighter or as most people know, 'Bruce' is hosting an extravagant gala tonight, unveiling a so-called ‘life-changing’ technology."
