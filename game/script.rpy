@@ -92,7 +92,7 @@ Label Lilith:
     f "Agent 874... You’ll be working with Agent 675 and Agent 986."
     "You glance over as the two other agents nod at you, one tall and unreadable behind tinted lenses, the other scanning a sleek datapad already. You smile back at your field coordinator"
     f "All teams are now assigned. Final briefings are being uploaded to your watches. Mission clocks start in thirty minutes. You are dismissed—and good luck out there."
-    return"
+    return
     "Agents quickly file out of the area, leaving you and your teammates standing in awkward silence. Agent 986 steps forward with a friendly smile and extends their hand."
     t2 "Hi! My name is Agent 986. I’m looking forward to working with you. What’s your name?"
     U "I’m Agent 874. Nice to meet you."
