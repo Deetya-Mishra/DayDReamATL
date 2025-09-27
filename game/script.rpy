@@ -47,7 +47,7 @@ label female:
     c "Instructions: Contact your field manager for briefing."
     c "Team assignments incoming, please stand by."
     "You lean back, letting the wheels of your chair squeak beneath you, and run a hand down your face."
-    show U standby
+    show a874f standby
     U "Seriously? Today was supposed to be quiet."
     "The words hang in the air as the screen's glow reflects off your tired eyes. You sit there for a moment — five minutes, maybe more — the calm before the storm. But in this business, calm never lasts."
     "Suddenly, your wristwatch buzzes sharply, snapping you to attention. A message blinks on its display:"
