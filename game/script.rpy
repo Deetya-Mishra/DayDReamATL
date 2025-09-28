@@ -236,6 +236,10 @@ label wepselect:
         "You move to grab your next item."
         menu:
             mat "Here's what's available:"
+            "":
+                pass
+            "":
+                pass
             "Hoverboard — Fast personal transport with silent operation":
                 if "hoverboard" in weapons:
                     mat "Sorry, you already have that one!"
@@ -266,25 +270,25 @@ label wepselect:
                     # This adds the weapon into the list of weapons, which will be used later to add in options for the crises.
                 jump wepselect
                 # Jumping to wepselect allows for the user to continue their selection after selecting their nth weapon.
-            "X-ray Vision goggles — See through walls and containers":
-                if "xray" in weapons:
-                    mat "Sorry, you already have that one!"
-                    $ weaponcounter -= 1
-                else:
-                    $ weapons.append("xray")
-                    $ wepdescs.append("X-ray Vision goggles — See through walls and containers")
+            # "X-ray Vision goggles — See through walls and containers":
+                # if "xray" in weapons:
+                    # mat "Sorry, you already have that one!"
+                    # $ weaponcounter -= 1
+                # else:
+                    # $ weapons.append("xray")
+                    # $ wepdescs.append("X-ray Vision goggles — See through walls and containers")
                     # This adds the weapon into the list of weapons, which will be used later to add in options for the crises.
-                jump wepselect
+                # jump wepselect
                 # Jumping to wepselect allows for the user to continue their selection after selecting their nth weapon.
-            "Night Vision Goggles — Great for dark, unlit areas":
-                if "night" in weapons:
-                    mat "Sorry, you already have that one!"
-                    $ weaponcounter -= 1
-                else:
-                    $ weapons.append("night")
-                    $ wepdescs.append("Night Vision Goggles — Great for dark, unlit areas")
+            #"Night Vision Goggles — Great for dark, unlit areas":
+            #     if "night" in weapons:
+            #       mat "Sorry, you already have that one!"
+            #       $ weaponcounter -= 1
+                # else:
+                #  $ weapons.append("night")
+                #  $ wepdescs.append("Night Vision Goggles — Great for dark, unlit areas")
                     # This adds the weapon into the list of weapons, which will be used later to add in options for the crises.
-                jump wepselect
+                # jump wepselect
                 # Jumping to wepselect allows for the user to continue their selection after selecting their nth weapon.
             "Heat Vision Goggles — Detect body heat and temperature changes":
                 if "heat" in weapons:
@@ -306,15 +310,15 @@ label wepselect:
                     # This adds the weapon into the list of weapons, which will be used later to add in options for the crises.
                 jump wepselect
                 # Jumping to wepselect allows for the user to continue their selection after selecting their nth weapon.
-            "Voice Changer — Mimic another person's voice for disguise":
-                if "voichan" in weapons:
-                    mat "Sorry, you already have that one!"
-                    $ weaponcounter -= 1
-                else:
-                    $ weapons.append("voichan")
-                    $ wepdescs.append("Voice Changer — Mimic another person's voice for disguise")
+            #"Voice Changer — Mimic another person's voice for disguise":
+            #     if "voichan" in weapons:
+            #       mat "Sorry, you already have that one!"
+            #       $ weaponcounter -= 1
+                # else:
+                #   $ weapons.append("voichan")
+                #   $ wepdescs.append("Voice Changer — Mimic another person's voice for disguise")
                     # This adds the weapon into the list of weapons, which will be used later to add in options for the crises.
-                jump wepselect
+                # jump wepselect
                 # Jumping to wepselect allows for the user to continue their selection after selecting their nth weapon.
             "Hologram Projector — Create a decoy image of yourself":
                 if "holo" in weapons:
@@ -402,5 +406,55 @@ label sleepover:
     "You sit in your room with the other team members. 675 is sitting in the corner looking at their screen. 986 is struggling with a large bag and drops it on the floor, causing a large assortment of snacks to fall out."
     hide a675 standby
     with dis
-    show a874 at lefpos
+    show expression "a874[gender] standby" as a874 at lefpos
     with move
+    t2 "Okay, I have popcorn, gummy bears, and soda. Oh, and apples, so we can tell the director we were being healthy."
+    menu:
+        t2 "Let's play a game."
+        "Yes":
+            u "Sure."
+            "You grab a board game off the shelf and sit with your teammates. After a few rounds, you feel like you've gotten to know them a lot better. You look at the clock and notice that it's getting late."
+            u "We should probably get some rest."
+            hide a986 standby
+            with dis
+            show a675 standby at ripos
+            with dis
+            t1 "Yes. But before that, we need a plan."
+            hide a874 
+            with dis
+            show a986 standby at lefpos 
+            with moveinbottom
+            t2 "I agree!"
+            jump plan
+        "No":
+            u "We should probably come up with a plan for tomorrow."
+            hide a986 standby
+            with dis
+            show a675 standby at ripos
+            with dis
+            t1 "I agree."
+            jump plan
+label plan:
+    hide a874
+    show a986 standby at lefpos
+    t2 "Well, I'm good with tech. I can hack through the security and edit it to hide our tracks."
+    t1 "I'm good with combat."
+    hide a675 standby
+    with dis
+    show expression "a874[gender] standby" as a874 at ripos
+    with dis
+    u "Great. Then you can take care of any guards that come our way. I've already made a pathway for us to follow with the map of the building. I've also made multiple exit plans."
+    t2 "You sound like a team leader already."
+    u "Huh???"
+    hide a986 standby
+    with moveoutbottom
+    show a675 standby at lefpos
+    with dis
+    t1 "She's right. You should lead our group through this mission, since you already came up with a plan."
+    u "Are you sure?"
+    hide a675 standby
+    with dis
+    show a986 standby at lefpos
+    with moveinbottom
+    t2 "I can't think of anyone more fit for the job."
+    u "All right. Let's do this, team."
