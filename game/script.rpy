@@ -458,3 +458,41 @@ label plan:
     with moveinbottom
     t2 "I can't think of anyone more fit for the job."
     u "All right. Let's do this, team."
+    jump locker
+label locker:
+    scene bg lockers
+    with dis
+    show expression "a874[gender] standby" as a874 at genpos
+    with dis
+    "You and the teams meet up in the locker room. Everyone has their game faces on."
+    "This could be one of the most difficult missions in your entire career. Rumor has it that it will determine whether you get a promotion or be banished to the lower ranks."
+    "{b}{u}Stakes are high...{/b}{/u}"
+    show a675 standby at lefpos
+    with dis
+    show a986 standby at ripos
+    with moveinbottom
+    hide a874
+    with dis
+    "Aaaaaaaaand 986 is talking with 675 about what ice cream they should have."
+    t2 "I am telling you, Cherry Blossom Blast is THE best ice cream flavor in existence."
+    t1 "It's too sweet, though. Midnight Raspberry is better."
+    t2 "Ugh, you're so emo. Is your middle name \"The Dark One\" or something?"
+    t1 "No. It's Ronan."
+    hide a986 standby
+    show a986 hi at ripos
+    "986 bursts out laughing."
+    t2 "Oh my gosh, that's even worse!"
+    "675 rolls his eyes."
+    hide a986 hi with moveoutbottom
+    show expression "a874[gender] standby" as a874 at ripos
+    with dis
+    t1 "Hey 874, you ready?"
+    u "Yeah. Are we ready to go?"
+    show expression "a874[gender] standby" as a874 at genpos
+    with move
+    show a986 standby at ripos
+    with dis
+    "They both nod."
+    u "All right. Let's do this."
+    jump mission
+label mission:
