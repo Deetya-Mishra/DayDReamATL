@@ -13,9 +13,12 @@ define t2 = Character("Agent 986", color="#e93356")
 define un = Character("???")
 define mat = Character("Matt")
 define dis = Dissolve(.5)
+define sec1 = Character("Security 1")
+define sec2 = Character("Security 2")
 define weapons = []
 define wepdescs = []
 define weaponcounter = 0
+define abilityusecounter = 0
 transform genpos:
     xalign 0.5
     yalign 0.125
@@ -83,6 +86,7 @@ label briefing:
 
     # These display lines of dialogue.
     "You step into the elevator, still adjusting your tie with one hand. The knot’s crooked, but it’ll have to do. Around here, one thread out of place gets you a week of mind-numbing overtime, and the field coordinators have eyes sharper than the most advanced lie detectors."
+    play music "elevator.mp3"
     "The elevator hums softly as it descends. The transparent glass walls reveal the city’s heartbeat inside HQ: a sprawling, high-tech lobby bursting with controlled chaos."
     scene bg hq 
     with vpunch
@@ -96,6 +100,7 @@ label briefing:
     with vpunch
     "With a hiss, the elevator doors part. You step out onto the upper level of the lobby and scan the scene:"
     show expression "a874[gender] standby" as a874 at genpos
+    stop music
     "On the lower level, food courts buzz with chatter and sizzling grills. Agents on break rush to grab a quick bite before their next shift. Others drag themselves toward the exits, exhausted from the one they just finished."
     "The mid-level is alive with motion, labs open to the air like vendor stalls, where agents queue up for any last-minute tech for their mission: neural headsets, cloaking pins, EMP gloves. A few younger agents zip by on hoverboards, clearly showing off."
     "Up here on the upper level, where you're standing, twenty agents gather in a tight formation. You recognize the unmistakable posture of professionals—alert, quiet, sharp. You blend into the group just as your field coordinator steps forward. "
@@ -228,6 +233,8 @@ label weapontime:
     "He leads you down an aisle lined with display tables. Each one holds a gleaming piece of tech, neatly labeled and ready for field use."
     mat "Everything you see here is fully functional. Choose wisely — each of you can carry up to five items."
     "You study the gear in front of you. 986 is already strapping on a grappling hook like it's a fashion accessory. 675 is more focused, methodically examining each item."
+    $ weapons.clear()
+    $ wepdescs.clear()
     jump wepselect
 label wepselect:
     if weaponcounter <=5:
@@ -496,3 +503,110 @@ label locker:
     u "All right. Let's do this."
     jump mission
 label mission:
+    scene bg rooftop with dis
+    show expression "a874[gender] standby" as a874 at genpos
+    with dis
+    "You find your group on the roof of Lighter Industries."
+    show a986 standby at lefpos
+    with moveinbottom
+    show a675 standby at ripos
+    with dis
+    "986 is checking their gear and 675 is sharpening their weapon. You review the plan again. Suddenly, you get a ping on your watch. A message from Group 2."
+    c "We're inside and mingling with some guests. You can proceed with the mission."
+    "You turn to your group members and give them the okay signal."
+    u "Follow my lead."
+    play sound "vent.mp3"
+    scene bg galahallway
+    with dis
+    "You and your group members crawl through the vents trying to locate the flash drive. You took on the west side of the building, while Group 7 works on the east side."
+    play sound "vent.mp3"
+    "You eventually climb out of the vents and land in a dark hallway."
+    show expression "a874[gender] standby" as a874 at genpos
+    with dis
+    show a675 standby at ripos
+    with moveinbottom
+    show a986 standby at lefpos
+    with dis
+    u "All right, team. Let's spread out between these two hallways. We have about an hour to find the flash drive."
+    t2 "All right, time to destroy the industry!"
+    hide a986 standby with moveoutright
+    show expression "a874[gender] standby" as a874 at lefpos
+    with move
+    "986 runs off and 675 lets out a chuckle. He then turns to you."
+    t1 "Are you sure you'll be okay by yourself?"
+    u "I'll be fine."
+    t1 "Okay. Call us if you need anything."
+    hide a675 standby with moveoutleft
+    show expression "a874[gender] standby" as a874 at genpos
+    with move
+    "He runs off in the other direction as you search the hallway. You eventually find a door at the end of the hallway and decide to open it. Inside you find a briefcase. You try to open it to see what's inside. Just then, you hear a noise outside the door."
+    u "Shoot, security."
+    play sound "footsteps.mp3"
+    "You hear their steps getting closer. There's not much time left."
+    u "[lil], I need to borrow your powers."
+    show expression "[lil.lower()] standby" as aia at lefpos
+    ai "Are you sure that you would like to use my abilities? Side effects may include: nausea, dizziness, headaches-"
+    u "I don't care, just do it."
+    show expression "a874[gender] standby" as a874 at ripos
+    with move
+    if lil == "Lilith":
+        jump liluse1
+    else:
+        jump levuse1
+label liluse1:
+    ai "If you say so."
+    "Your watch starts to glow and you feel a tingling sensation throughout your body. You notice that your hands start to take a different form. The doorknob clicks open as security enters."
+    show expression "[lil.lower()] standby" as aia at lefpos
+    hide aia
+    sec1 "What are you doing here? Are you not supposed to be outside?"
+    u "I was, sir. However, I heard crashing sounds coming from the room. I just wanted to make sure everything was all right here."
+    sec1 "Yes, there were crashing sounds. However, that was in another room and we have security taking care of it right now. Be vigilant. This is one of the biggest events the boss has ever hosted and the threat of a break-in has been ever-growing."
+    u "Yes, sir."
+    sec1 "Good. I leave you to it."
+    "The security guard closes the door and you let out a sigh of relief."
+    jump closet
+label levuse1:
+    ai "As you wish."
+    "Your watch starts to glow and you feel a tingling sensation throughout your body. You look at your hand and see that it is almost see through. The knob on the door handle clicks."
+    "You grab hold of the briefcase and phase through the wall. You find yourself in an empty room with the lights off. The wall wasn’t thick, but you still received a scar on your right arm. A small price to pay for the success of the mission."
+    jump closet
+label closet:
+    u "[lil], power off."
+    scene bg closet
+    hide aia with dis
+    "You watch as your hand slowly turns back to its normal self. Overall, you seem fine, minus the slight headache, You send a message to your teammates and agree to meet in the storage closet. You open the door and run to the location."
+    # Start of Part 8
+    "You enter the storage closet where your two teammates are already sitting down."
+    show expression "a874[gender] standby" as a874 at genpos
+    with move
+    show a675 standby at lefpos
+    with dissolve
+    show a986 standby at ripos
+    with moveinbottom
+    u "I have a briefcase. I think there might be some information inside and-"
+    hide a986 standby with dissolve
+    show expression "a874[gender] standby" as a874 at ripos
+    with move
+    t1 "That doesn't matter."
+    u "What?"
+    hide a675 standby with dissolve
+    show a986 standby at lefpos
+    with moveinbottom
+    t1 "Yeah. Well, the mission does matter..."
+    t1 "But you're ten times more important than that stupid briefcase. You could've been caught!"
+    hide a986 standby with moveoutbottom
+    show a675 standby at lefpos
+    with dissolve
+    t2 "You also used the AI to escape."
+    with vpunch
+    with hpunch
+    t2 "DO YOU HAVE ANY IDEA HOW DANGEROUS THAT WAS?!?!"
+    u "Look, I did what i had to. Sacrifices must be made for this mission. I'm fine. Let's just open the briefcase."
+    "You open up the briefcase and find multiple CDs and hard drives, along with the flash drive."
+    hide a675 standby with dissolve
+    show a986 standby at lefpos
+    t2 "You did it!"
+    u "Great. Let's get this back to HQ and-"
+    stop music
+    play music "battle.mp3"
+    sec2 "Over here! They're in the supply closet."
