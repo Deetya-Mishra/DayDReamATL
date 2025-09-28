@@ -125,7 +125,6 @@ label briefing:
             jump assistant
 
 label assistant:
-    #hide expression "a874[gender] standby"
     hide lilith standby
     with zoomout
     hide levi standby
@@ -201,7 +200,9 @@ label assistant:
     show a986 hi at ripos
     with moveinbottom
     t2 "Come on, let’s go!"
+    jump weapontime
     # Part 4 begins
+label weapontime:
     scene bg sciwing
     with dis
     show a986 standby at ripos
@@ -226,6 +227,7 @@ label assistant:
     mat "Your field coordinator said that you guys would be stopping by. I'll walk you through what we've got ready."
     "He leads you down an aisle lined with display tables. Each one holds a gleaming piece of tech, neatly labeled and ready for field use."
     mat "Everything you see here is fully functional. Choose wisely — each of you can carry up to five items."
+    "You study the gear in front of you. 986 is already strapping on a grappling hook like it's a fashion accessory. 675 is more focused, methodically examining each item."
     jump wepselect
 label wepselect:
     if weaponcounter <=5:
@@ -366,3 +368,39 @@ label wepselect:
 label chosen:
     u "I'm done."
 # Known issue: Not all of the buttons are visible on the screen. May need to remove some options.
+    "You turn to your teammates. 986 has picked up a motorcycle, grappling hook, and iPad. 675 has picked up a hoverboard, grappling hook, and night vision goggles."
+    hide a675 standby
+    show matt standby at lefpos
+    with move
+    mat "Ah, I almost forgot."
+    "Matt hands each of you a case."
+    mat "You'll need these weapons for your mission. Good luck, you guys."
+    hide a986 standby
+    show expression "a874[gender] standby" as a874 at ripos
+    with moveinbottom
+    u "Thanks. I greatly appreciate it."
+    hide matt standby
+    show a986 standby at lefpos with moveinleft
+    t2 "All right, Team Hyperdrive for the win!"
+    hide a874
+    show a675 standby at ripos
+    with moveinright
+    t1 "Team Hyperdrive?"
+    t2 "Yeah, you like it? I came up with it myself!"
+    "You look at your watch and see a new message from your field coordinator:"
+    c "Groups 4 and 5, please report to training center four tomorrow at 11 am to get ready for your mission. You deploy at 7 pm. Get good rest."
+    show expression "a874[gender] standby" as a874 at genpos
+    u "Hey team, sleepover at my place?"
+    jump sleepover
+    # Part 5 begins.
+label sleepover:
+    scene bg bed
+    with dis
+    show expression "a874[gender] standby" as a874 at genpos
+    show a675 standby at lefpos
+    show a986 standby at ripos
+    "You sit in your room with the other team members. 675 is sitting in the corner looking at their screen. 986 is struggling with a large bag and drops it on the floor, causing a large assortment of snacks to fall out."
+    hide a675 standby
+    with dis
+    show a874 at lefpos
+    with move
