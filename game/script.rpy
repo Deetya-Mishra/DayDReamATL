@@ -15,10 +15,19 @@ define mat = Character("Matt")
 define dis = Dissolve(.5)
 define sec1 = Character("Security 1")
 define sec2 = Character("Security 2")
+define sec3 = Character("Security 3")
+define g1 = Character("Group 1 Leader")
+define g2 = Character("Group 2 Leader")
+define ceo = Character("Alexander 'Bruce' Lighter")
+define deathphrase = "a"
 define weapons = []
 define wepdescs = []
 define weaponcounter = 0
 define abilityusecounter = 0
+define dead = 0
+define alive = 0
+define t = t1
+define nt = t2
 transform genpos:
     xalign 0.5
     yalign 0.125
@@ -102,6 +111,7 @@ label briefing:
     show expression "a874[gender] standby" as a874 at genpos
     stop music
     "On the lower level, food courts buzz with chatter and sizzling grills. Agents on break rush to grab a quick bite before their next shift. Others drag themselves toward the exits, exhausted from the one they just finished."
+    play music "lobby.mp3"
     "The mid-level is alive with motion, labs open to the air like vendor stalls, where agents queue up for any last-minute tech for their mission: neural headsets, cloaking pins, EMP gloves. A few younger agents zip by on hoverboards, clearly showing off."
     "Up here on the upper level, where you're standing, twenty agents gather in a tight formation. You recognize the unmistakable posture of professionals—alert, quiet, sharp. You blend into the group just as your field coordinator steps forward. "
     hide a874
@@ -208,6 +218,8 @@ label assistant:
     jump weapontime
     # Part 4 begins
 label weapontime:
+    stop music
+    play music "lab.mp3"
     scene bg sciwing
     with dis
     show a986 standby at ripos
@@ -503,6 +515,8 @@ label locker:
     u "All right. Let's do this."
     jump mission
 label mission:
+    stop music
+    play music "entry.mp3"
     scene bg rooftop with dis
     show expression "a874[gender] standby" as a874 at genpos
     with dis
@@ -536,6 +550,8 @@ label mission:
     t1 "Are you sure you'll be okay by yourself?"
     u "I'll be fine."
     t1 "Okay. Call us if you need anything."
+    stop music
+    play music "split.mp3"
     hide a675 standby with moveoutleft
     show expression "a874[gender] standby" as a874 at genpos
     with move
@@ -601,7 +617,7 @@ label closet:
     with vpunch
     with hpunch
     t2 "DO YOU HAVE ANY IDEA HOW DANGEROUS THAT WAS?!?!"
-    u "Look, I did what i had to. Sacrifices must be made for this mission. I'm fine. Let's just open the briefcase."
+    u "Look, I did what I had to. Sacrifices must be made for this mission. I'm fine. Let's just open the briefcase."
     "You open up the briefcase and find multiple CDs and hard drives, along with the flash drive."
     hide a675 standby with dissolve
     show a986 standby at lefpos
@@ -610,3 +626,255 @@ label closet:
     stop music
     play music "battle.mp3"
     sec2 "Over here! They're in the supply closet."
+    hide a986 standby with moveoutbottom
+    show a675 standby at lefpos
+    with dis
+    t1 "Shoot, they found us."
+    hide a874
+    with dis
+    show expression "a874[gender] standby" as a874 at genpos
+    with move
+    show a986 standby at ripos
+    with moveinbottom
+    hide a874
+    t2 "What do we do?!"
+    menu:
+        t1 "We can either fight or make a run for it. What do you think?"
+        "Fight":
+            
+            jump fight
+        "Run":
+            
+            jump run
+label fight:
+    u "We stand out ground. Ready your weapons. The mission depends on it."
+    "The others nod and ready themselves for battle."
+    show expression "a874[gender] standby" as a874 at genpos
+    u "On my count, we attack. Three..."
+    u "Two..."
+    stop music
+    play music "battle.mp3"
+    u "One..."
+    play sound "door.mp3"
+    hide a874
+    jump battle
+label run:
+    u "We make a run for it. There's no use in fighting unnecessary battles."
+    "The others nod."
+    show expression "a874[gender] standby" as a874 at genpos
+    u "On my count, we run. Three..."
+    u "Two..."
+    stop music
+    play music "battle.mp3"
+    u "One..."
+    play sound "door.mp3"
+    hide a874
+    jump flight
+label battle:
+    "The door swings open revealing three security guards. You and your team immediately attack them with full power." 
+    "Your weapon meets the head of a security guard with a loud crack. They stumble back and groan in pain."
+    show expression "a874[gender] standby" as a874 at genpos
+    sec2 "Ack! My head."
+    sec3 "We need backup over here! Keep fighting, we can't let them aahhh-"
+    "Agent 986 raises their weapon to the back of the security guard's head, knocking them out. She then turns to the other guard."
+    t2 "You wanna fight too?"
+    sec1 "No, please spare me!!"
+    t2 "Too late!"
+    with hpunch
+    "She and 675 knock him out."
+    stop music
+    play music "run.mp3"
+    t1 "Come on, let's find an exit."
+    "You run out the door with your teammates to find an exit."
+    t2 "Over there! I see a door!"
+    hide a874
+    jump sacrifice
+label flight:
+    "The door swings open, revealing three security guards. You and your team immediately run out the door with full power."
+    sec2 "They're getting away!"
+    show expression "a874[gender] standby" as a874 at genpos
+    sec1 "Well, don't just stand there!"
+    with hpunch
+    sec1 "AFTER THEM!!!"
+    t2 "We are so dead."
+    stop music
+    play music "run.mp3"
+    t1 "Only if you don't run faster. Come on!"
+    u "Over there, I see an exit!"
+    hide a874
+    jump sacrifice
+label sacrifice:
+    show expression "a874[gender] standby" as a874 at genpos
+    "You run over to the door and push it open."
+    play sound "door.mp3"
+    "Ten more security guards are waiting behind it."
+    t1 "We're surrounded."
+    u "Push through!"
+    stop music
+    play music "secentry.mp3"
+    "You and your teammates attack the security guard with full power. Weapons clash. Fists collide with faces."
+    t2 "We can't hold them off much longer!"
+
+    hide a874 with dis
+    hide a986 standby with dis
+    pause 0.5
+    show a675 standby at genpos
+    with dis
+    t1 "I can hold them off while you guys escape with the briefcase."
+    hide a675 standby with dis
+    pause 0.5
+    show a986 standby at genpos
+    with dis
+    t2 "No, I'll do it. You shouldn't risk your life for this."
+    hide a986 standby with dis
+    pause 0.5
+    show expression "a874[gender] standby" as a874 at genpos
+    with dis
+    u "Neither should you. All of you are too valuable to risk your lives."
+    hide a874
+    t1 "The same with you. You said sacrifices must be made. All for the greater good."
+    t1 "You have to make a sacrifice."
+    menu:
+        t1 "So, who will stay behind?"
+        "675":
+            jump d675
+        "986":
+            jump d986
+        "874(you)":
+            jump d874
+label d675:
+    u "All right. 675, you will stay behind. 986 and I will return to HQ."
+    show a675 standby at genpos
+    with dis
+    "675 nods."
+    t1 "Affirmative."
+    u "Will you be all right?"
+    "675 smiles."
+    t1 "Of course. Now, go!"
+    "You and 986 run, leaving him behind."
+    $ dead = 675
+    $ alive = 986
+    $ t = t2
+    $ nt = t1
+    jump conc
+label d986: 
+    u "All right. 986, you will stay behind. 675 and I will return to HQ."
+    show a986 standby at genpos
+    with dis
+    "986 nods."
+    t2 "You got it, boss!"
+    u "Will you be all right?"
+    "986 smiles."
+    t2 "Of course! Now, scram, ya lazy bums!"
+    "You and 675 run, leaving her behind."
+    $ dead = 986
+    $ alive = 675
+    jump conc
+label d874:
+    u "I'll stay behind. You and 986 have a better chance of getting the briefcase back to HQ."
+    show expression "a874[gender] standby" as a874 at genpos
+    with dis
+    t2 "Are you sure you can do it alone?"
+    u "Of course. Besides, sacrifices must be made."
+    "986 and 675 nod."
+    u "Good. Now, go!"
+    "They both leave with the briefcase, leaving you behind."
+    $ dead = 874
+    jump conc
+label conc:
+    stop music
+    play music "end.mp3"
+    if not dead == 874:
+        scene bg gala
+        show expression "a[alive] standby" as living at ripos
+        with dis
+        show expression "a874[gender] standby" as a874 at lefpos
+        with dis
+        "You run down the stircase with [alive] and the briefcase in hand."
+        t "Let's take this door. It will lead out into the back of the building. That way, we can escape without being spotted."
+        u "Okay."
+        "You bring out your watch to notify the other teams."
+        u "We have the flash drive and a bunch of other hard drives and information. We're exiting the building now."
+        g1 "Affirmative! Groups 7 and 8 have been spotted, so be on the lookout for security."
+        u "We've already run into them. Agent [dead] decided to stay behind and fight off the guards."
+        if dead == 986:
+            g2 "She did what?"
+        else:
+            g2 "He did what?"
+        "Your watch buzzes: A call from [dead]"
+        u "[dead], what's your status?"
+        nt "Listen to me carefully. I'm going to use the AI to fight them off, but it'll use a lot of power."
+        t "What are you saying? You can't just sacrifice yourself. If you use it too much, you'll die! You got upset at 874 for doing that!!"
+        if dead == 986:
+            $ deathphrase = "go to waste. That would be a major aura loss for me."
+        else: 
+            $ deathphrase = "be in vain."
+        nt "I know what I said. Just please, finish the mission. Don't let my sacrifice [deathphrase]"
+        u "For the greater good."
+        "You and [alive] rush out of the building."
+        return
+    else:
+        "675 and 986 run down the stairs with the briefcase, leaving you with the security guards."
+        with hpunch
+        pause 0.25
+        "One by one, you take them out. However, as you defeat one, it seems as if two more come in their place."
+        with hpunch
+        pause 0.5
+        with hpunch
+        u "How many security guards does this guy have?"
+        with hpunch
+        pause 0.75
+        with hpunch
+        pause 1.0
+        with hpunch
+        "You swing your weapon, knocking out another guard as exhaustion creeps up on you."
+        play sound "footsteps.mp3"
+        "Suddenly, you hear footsteps coming from behind you." 
+        pause 5
+        stop sound
+        play sound "clap.opus"
+        "You turn around to see the CEO clapping."
+        ceo "Well, well, well. you've done a lot better than I expected. It seems I've underestimated you."
+        with hpunch
+        with vpunch
+        u "YOU WON'T GET AWAY WITH THIS."
+        with hpunch 
+        with vpunch
+        ceo "Oh? But it seems I already have."
+        "The situation is grave. There is only one choice left. You turn on your watch and call your teammates."
+        t1 "874, what's your status?"
+        u "Listen to me carefully."
+        u "I'm going to use the AI to fight them off, but it will use a lot of power."
+        t2 "What are you saying? You can't just sacrifice yourself. If you use it too much, you'll die! We just told you not to do that like ten minutes ago!"
+        u "I know, I know. Just please, finish the mission. Don't let my sacrifice go to waste. We need this mission to be a success. Besides, it's for the greater good."
+        t1 "For the greater good."
+        t2 "For the greater good."
+        "You turn to face the CEO."
+        u "[lil], power on."
+        scene bg dark with dis
+        if lil == "Lilith":
+            jump lily
+        else:
+            jump levis
+label lily:
+    "You use your AI's shapeshifting powers to change yourself and your weapons into various forms. You end up taking out all enemies until only the CEO is left. Your headache intensifies and you feel a growing despair at the disparities in your identity."
+    jump grandfinale
+label levis:
+    "You use your AI's teleportation and phasing powers to change yourself and your weapons into various forms. You end up taking out all of the enemies until the CEO is left, your injuries growing more severe."
+    jump grandfinale
+label grandfinale:
+    ceo "You've reached your limit. How could you possibly expect to beat me?"
+    scene bg galahallway
+    show expression "a874[gender] standby" as a874 at genpos
+    u "Sacrifices must be made."
+    "You use the last of your power to change your weapon's form one last time."
+    u "For the greater good."
+    scene bg dark with dis
+    stop music
+    pause 5.0
+    if lil == "Lilith":
+        "After you slew the CEO, your mental state collapsed, and the sense of despair grew all-encompassing. You ended yourself."
+        return
+    else: 
+        "After you slew the CEO, your injuries became fatal, and you died from an internal hemorrhage."
+        return
